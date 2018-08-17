@@ -1,53 +1,33 @@
 // Name: Hope Kim
 // Email: hopekim@usc.edu
-// ITP 365, Fall 2017
+// ITP 365 Fall 2017
 // HW1 – Sieve of Eratosthenes
 // Platform: Mac
 
+#include "gwindow.h"
+#include "sieve.h"
+#include "vector.h"
 
-#include <string>
-#include <iostream>
-#include <fstream>
-#include "map.h"
-class PhoneSystem
+int main()
 {
-public:
-    // Function: Constructor
-    // Purpose: Constructs two maps --
-    // (1) area codes -> locations
-    // (loaded from areacodes.txt)
-    // (2) phone numbers -> contacts
-    // (loaded from contacts.txt)
-    // Input: None
-    // Output: None
-    PhoneSystem();
-private:
-    // TODO: Add member variables here
-    Map<std::string, std::string> areaCodes;
-    Map<std::string, std::string> phoneNumbers;
-    std::string phoneNumber;
-};
-PhoneSystem::PhoneSystem()
-{
-    // inputs file
-    std::ifstream file(areacodes.txt);
-
-    // validates files
-    if (file.is_open()) {
-        while (!file.eof()) {
-            // Grab each line
-            std::string line;
-            std::getline(file, line);
-            // Make sure the line's format is valid
-            if (line.length() <= 4 && line[3] != '=') {
-                error("Invalid data in file " + fileName);
-            } else {
-                // Use substr to get first 3 characters
-                std::string key = line.substr(0, 3); // Get characters from 4 onwards
-                std::string value = line.substr(4); // Add to map
-                airports[key] = value; }
-        }
-    } else {
-        error("Failure to load file");
+	// Create a 500x500 window
+    GWindow gw(500, 500);
+    NumberType numberType = PRIME;
+    drawSquare(gw, 2, numberType, 0, 0);
+    
+    Vector<int> testNumbers;
+    Vector<NumberType> flagNumbers;
+    
+    inItVectors(testNumbers, flagNumbers);
+    
+    // while loop redsult of calcNextPrime > 0
+    // use result of calcNextPrime as the nextStartat
+    int nextPrime = 2;
+    while (nextPrime > 0)
+    {
+        nextPrime = calcNextPrime(testNumbers, flagNumbers, nextPrime);
+        drawGrid(gw, testNumbers, flagNumbers);
+        pause(10.0);
     }
+    return 0;
 }
