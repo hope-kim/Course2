@@ -1,5 +1,5 @@
 // ITP 365 Fall 2017
-// HW3 Towers of Hannoi
+// HW2 Towers of Hannoi
 // Name: Hope Kim
 // Email: hopekim@usc.edu
 // Platform: Mac
@@ -24,6 +24,3 @@ public:
     void addDisk(Disk& input);
     Disk removeDisk();
 };
-
-
-
